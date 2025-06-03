@@ -37,7 +37,7 @@ export default function Index() {
 
         {/* Overlay Menu */}
         {menuOpen && (
-          <View className="absolute top-16  w-full bg-green-600  p-4 z-20 shadow">
+          <View className="absolute top-16  w-full bg-green-800  p-4 z-20 shadow">
             
             <TouchableOpacity>
               <Text className="text-lg mb-2">Home</Text>
@@ -48,6 +48,12 @@ export default function Index() {
             <TouchableOpacity>
               <Text className="text-lg">Settings</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("/signin")} className="mt-4 bg-white p-2 rounded-lg">
+              <Text className="text-lg">SignIn</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("/signup")} className="mt-4 bg-white p-2 rounded-lg">
+              <Text className="text-lg">SignUp</Text>
+            </TouchableOpacity>
             
             
           </View>
@@ -56,7 +62,7 @@ export default function Index() {
         {/* Scrollable Main Content */}
         <ScrollView className="flex-1">
           {/* Welcome Section */}
-          <View className="p-4 m-2 bg-green-600">
+          <View className="p-4 m-2 bg-green-800">
             <Text className="text-2xl font-bold text-white">
               Hi, Gideon Ushindi
             </Text>
@@ -75,15 +81,15 @@ export default function Index() {
               className="mb-4"
             >
               
-                <TouchableOpacity className="bg-green-600 w-40 h-40 mr-4 rounded-lg items-center justify-center">
+                <TouchableOpacity className="bg-green-800 w-40 h-40 mr-4 rounded-lg items-center justify-center">
                   <Text className="text-white">Maize</Text>
                 </TouchableOpacity>
               
-                <TouchableOpacity className="bg-green-600 w-40 h-40 mr-4 rounded-lg items-center justify-center">
+                <TouchableOpacity className="bg-green-800 w-40 h-40 mr-4 rounded-lg items-center justify-center">
                   <Text className="text-white">Beans</Text>
                 </TouchableOpacity>
                
-                <TouchableOpacity className="bg-green-600 w-40 h-40 mr-4 rounded-lg items-center justify-center">
+                <TouchableOpacity className="bg-green-800 w-40 h-40 mr-4 rounded-lg items-center justify-center">
                   <Text className="text-white">Greengrams</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -107,13 +113,13 @@ export default function Index() {
                   Crop rotation is essential for maintaining soil health and
                   maximizing yield. Let's discuss the best practices.
                 </Text>
-                <View className="flex-row">
+                <View className="flex-row justify-between items-center px-4">
                   <TouchableOpacity className="px-4 py-2 rounded-full">
-                    <Text className="text-green-600 font-bold">80 replies</Text>
+                    <Text className="text-green-800 font-bold">80 replies</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity className="px-4 py-2 rounded-full" onPress={() => router.push("/replies")}>
-                    <Text className="text-green-600 font-bold">Reply</Text>
+                    <Text className="text-green-800 font-bold">Reply</Text>
                   </TouchableOpacity>
 
                 </View>
@@ -136,13 +142,13 @@ export default function Index() {
                   Crop rotation is essential for maintaining soil health and
                   maximizing yield. Let's discuss the best practices.
                 </Text>
-                <View className="flex-row">
+                <View className="flex-row justify-between items-center px-4">
                   <TouchableOpacity className="px-4 py-2 rounded-full">
-                    <Text className="text-green-600 font-bold">80 replies</Text>
+                    <Text className="text-green-800 font-bold">80 replies</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity className="px-4 py-2 rounded-full">
-                    <Text className="text-green-600 font-bold">Reply</Text>
+                    <Text className="text-green-800 font-bold">Reply</Text>
                   </TouchableOpacity>
 
                 </View>
@@ -165,13 +171,13 @@ export default function Index() {
                   Crop rotation is essential for maintaining soil health and
                   maximizing yield. Let's discuss the best practices.
                 </Text>
-                <View className="flex-row">
+                <View className="flex-row justify-between items-center px-4">
                   <TouchableOpacity className="px-4 py-2 rounded-full">
-                    <Text className="text-green-600 font-bold">80 replies</Text>
+                    <Text className="text-green-800 font-bold">80 replies</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity className="px-4 py-2 rounded-full">
-                    <Text className="text-green-600 font-bold">Reply</Text>
+                    <Text className="text-green-800 font-bold">Reply</Text>
                   </TouchableOpacity>
 
                 </View>

@@ -7,6 +7,9 @@ export default function RootLayout() {
       <Stack screenOptions={{headerShown: true}}>
         <Stack.Screen name="index"options={{title:"Farm Link"}}  />
         <Stack.Screen name="replies"options={{title:"Replies"}}  />
+        <Stack.Screen name="signin"options={{title:"SignIn"}}  />
+        <Stack.Screen name="signup"options={{title:"SignUp"}}  />
+        <Stack.Screen name="forgotpassword"options={{title:"Forgot Password"}}  />
 
       </Stack>
     </SafeAreaProvider>
