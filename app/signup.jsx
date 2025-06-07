@@ -1,11 +1,10 @@
-import {Text, View, StatusBar, TextInput, TouchableOpacity, Image,SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
-import DropDownPicker from 'react-native-dropdown-picker';
-import { useState } from "react";
-import "../global.css";
-import { useRouter } from "expo-router";
-import { router } from "expo-router";
 import axios from "axios";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import { ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import DropDownPicker from 'react-native-dropdown-picker';
 import Toast from "react-native-toast-message";
+import "../global.css";
 
 
 export default function SignUp(){
@@ -27,8 +26,8 @@ export default function SignUp(){
     ]);
 
     //start of handle register
-    const handleRegister = async() => {
-      if(email == "" || value == "" || password == "" || confirmPassword == ""){
+    const handleSignUp = async() => {
+      if(fullname == "" || phonenumber == "" || email == "" || value == null || password == "" || confirmPassword == ""){
         Toast.show({
               type: "error", // Can be "success", "error", "info"
               text1: "Empty fields",
@@ -41,34 +40,31 @@ export default function SignUp(){
       if(password == confirmPassword){
         setIsLoading(true);
         try {
-          const url = "https://complaincomplimentbackend.onrender.com/register/";
+          const url = "https://farmlinkbackend-qupt.onrender.com/signup/";
           const data = {
+              fullname: fullname,
+              phonenumber: phonenumber,
               email: email,
-              role: value,
+              areaofresident: value,
               password: password,
           };
-  
-          console.log("Sending data:", data);  // Log request data
   
           const response = await axios.post(url, data, {
               headers: { "Content-Type": "application/json" },
           });
-  
-          console.log("Response received:", response.data);  // Log response
-          // alert(response.data.message || "Registration successful!");
-          Toast.show({
-            type: "success", // Can be "success", "error", "info"
-            text1: "Successfully",
-            text2: response.data.message,
-            position:"center",
-          });
-          if(response.data.message == "Successfully registered"){
-            router.push("/");
+          if(response.status === 201){
+            Toast.show({
+              type: "success", // Can be "success", "error", "info"
+              text1: "Signup successful",
+              text2: "You can now sign in",
+              position:"center",
+            });
+            router.push("signin/");
           }
           else{
             Toast.show({
               type: "error", // Can be "success", "error", "info"
-              text1: "Failed registration",
+              text1: "Failed signup",
               text2: response.data.message,
               position:"center",
             });
@@ -148,7 +144,7 @@ export default function SignUp(){
       onChangeText={setEmail}
       className="w-full p-4 bg-white rounded-lg shadow-sm mb-4 border border-green-800 text-gray-400 text-lg"
       />
-    <Text className="text-lg text-green-800 font-bold">Area of resident</Text>
+    <Text className="text-lg text-green-800 font-bold">Area of residence</Text>
       <DropDownPicker
         open={open}
         value={value}
@@ -156,7 +152,7 @@ export default function SignUp(){
         setOpen={setOpen}
         setValue={setValue}
         setItems={setItems}
-        placeholder="Select area of resident"
+        placeholder="Select area of residence"
         style={{borderColor: '#277230',borderWidth: 1,  
         }}
         listMode="SCROLLVIEW"
@@ -182,7 +178,7 @@ export default function SignUp(){
       
       <TouchableOpacity className="w-full flex-row justify-end m-2" onPress={() => alert("Got to forgot password page")}>
       </TouchableOpacity>
-      <TouchableOpacity className="w-full bg-green-800 p-4 rounded-lg" onPress={handleRegister}>
+      <TouchableOpacity className="w-full bg-green-800 p-4 rounded-lg" onPress={handleSignUp}>
         {isLoading ? <ActivityIndicator size="large" color="#fff" /> : <Text className="text-white text-center font-semibold text-lg">SignUp</Text>}
       </TouchableOpacity>
       <View className="flex-row justify-center mt-4">

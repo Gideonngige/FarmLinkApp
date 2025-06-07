@@ -1,10 +1,9 @@
-import { Text, View, Image, TextInput, SafeAreaView, ScrollView, TouchableOpacity, StatusBar, ActivityIndicator } from "react-native";
-import '../global.css';
-import { useState } from "react";
-import Toast from "react-native-toast-message";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from "expo-router";
-import axios from "axios";
+import { useState } from "react";
+import { ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import Toast from "react-native-toast-message";
+import '../global.css';
 
 export default function SignIn() {
   const[email, setEmail] = useState("");
@@ -12,7 +11,7 @@ export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
 
   // start of handle login
-  const handleLogin = async () => {
+  const handleSignIn = async () => {
     if(email == "" || password == ""){
       Toast.show({
         type: "error", // Can be "success", "error", "info"
@@ -24,67 +23,34 @@ export default function SignIn() {
     else{
     setIsLoading(true);
     try {
-      const url = `https://complaincomplimentbackend.onrender.com/login/${email}/${password}/`;
-      const response = await axios.get(url);
-      const url2 = `https://complaincomplimentbackend.onrender.com/getuser/${email}/`;
-      const response2 = await axios.get(url2);
+      const response = await fetch('https://farmlinkbackend-qupt.onrender.com/signin/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
       
-      
-      if (response.status === 200 && response2.status === 200) {
-        const message = response.data.message; 
-        if(message == "Successfully logged in"){
-          await AsyncStorage.setItem('email', email);
-          // router.push("/home");
-          if(response2.data.role == "admin"){
-            await AsyncStorage.setItem('department', response2.data.department);
-            switch(response2.data.department){
-              case "academic":
-                router.push("admin/");
-                break;
-              case "health and wellness":
-                router.push("admin/");
-                break;
-              case "administration and support":
-                router.push("admin/");
-                break;
-              case "ict and communication":
-                router.push("admin/");
-                break;
-              case "student services":
-                router.push("admin/");
-                break;
-              case "maintenance and environment":
-                router.push("admin/");
-                break;
-              default:
-                Toast.show({
-                  type: "error", 
-                  text1: "No department found",
-                  text2: "You have not been assigned to any department",
-                });
-                break;
-            }
-          }
-          else{
-            router.push("home/");
-
-          }
-      
-        }
-        else{
-          Toast.show({
-            type: "error",
-            text1: "Login Failed",
-            text2: message,
-          });
-          // alert(message);
-        }
-        return message;
-      } else {
+      const data = await response.json();
+      if (response.status === 200) {
+        await AsyncStorage.setItem("farmer_id", data.farmer_id.toString());
+        await AsyncStorage.setItem("farmer_name", data.farmer_name);
+        await AsyncStorage.setItem("farmer_email", data.farmer_email);
+        await AsyncStorage.setItem("phone_number", data.phone_number);
+        await AsyncStorage.setItem("area_of_residence", data.area_of_residence);
+        await AsyncStorage.setItem("profile_image", data.profile_image);
+        await AsyncStorage.setItem("date_joined", data.date_joined);
+        router.push("/");
+        
+      } 
+      else {
         Toast.show({
           type: "error", // Can be "success", "error", "info"
           text1: "Login failed",
-          text2: response.data,
+          text2: response.data.message,
         });
         // alert("Login Failed:", response.data);
         return null;
@@ -131,7 +97,7 @@ export default function SignIn() {
       <TouchableOpacity className="w-full flex-row justify-end m-4" onPress={() => router.push("/forgotpassword")}>
       <Text className="text-lg">Forgot password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity className="w-full bg-green-800 p-4 rounded-lg" onPress={handleLogin}>
+      <TouchableOpacity className="w-full bg-green-800 p-4 rounded-lg" onPress={handleSignIn }>
         {isLoading ? <ActivityIndicator size="large" color="#fff" /> : <Text className="text-white text-center font-semibold text-lg">SignIn</Text> }
         
       </TouchableOpacity>

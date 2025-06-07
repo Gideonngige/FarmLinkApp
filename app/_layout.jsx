@@ -10,6 +10,7 @@ export default function RootLayout() {
         <Stack.Screen name="signin"options={{title:"SignIn"}}  />
         <Stack.Screen name="signup"options={{title:"SignUp"}}  />
         <Stack.Screen name="forgotpassword"options={{title:"Forgot Password"}}  />
+        <Stack.Screen name="question"options={{title:"Ask Question"}}  />
 
       </Stack>
     </SafeAreaProvider>
