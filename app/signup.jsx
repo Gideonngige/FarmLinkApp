@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, SafeAreaView, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import Toast from "react-native-toast-message";
 import "../global.css";
@@ -188,11 +188,11 @@ export default function SignUp(){
       </TouchableOpacity>
       </View>
       <Toast/>
-      {/* <StatusBar
+      <StatusBar
       barStyle="dark-content" // or "light-content" depending on your background
       backgroundColor="transparent"
       translucent={true}
-      /> */}
+      />
       </View>
       </ScrollView>
       </SafeAreaView>

@@ -6,6 +6,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
@@ -42,6 +43,8 @@ export default function Replies() {
       fetchFarmerData();
 
     },[]);
+
+    
 
     // function to handle reply
     const handelReply = async()=>{
@@ -87,26 +90,28 @@ export default function Replies() {
   
   // function to fetch replies from the backend
     useEffect(() => {
-      const fetchReplies = async () => {
-        setIsLoadingReplies(true);
-        try {
-          const response = await fetch(`https://farmlinkbackend-qupt.onrender.com/get_replies/${questionId}`);
-          if (response.ok) {
-            const data = await response.json();
-            setReplies(data.replies || []);
-          } else {
-            console.error("Failed to fetch replies:", response.statusText);
-          }
-        } catch (error) {
-          console.error("Error fetching replies:", error);
-        } finally {
-          setIsLoadingReplies(false);
-        }
-      };
-  
-      fetchReplies();
+  const fetchReplies = async () => {
+    if (!questionId) return; // skip if questionId isn't ready
+
+    setIsLoadingReplies(true);
+    try {
+      const response = await fetch(`https://farmlinkbackend-qupt.onrender.com/get_replies/${questionId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setReplies(data.replies || []);
+      } else {
+        console.error("Failed to fetch replies:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching replies:", error);
+    } finally {
+      setIsLoadingReplies(false);
     }
-    , []);
+  };
+
+  fetchReplies();
+}, [questionId]); // Only run when questionId is set
+
   
 
 
@@ -136,7 +141,7 @@ export default function Replies() {
                               keyExtractor={(item) => item.id.toString()}
                               renderItem={({ item }) => (
                             <View className="bg-white m-2 rounded-lg shadow">
-                            <View className="flex-row items-center p-4">
+                            <View className="flex-row items-center p-2">
                               <Image
                                 source={{ uri: item.profile_image }}
                                 className="w-10 h-10 rounded-full mr-4"
@@ -146,11 +151,11 @@ export default function Replies() {
                               </View>
                               <Text className="ml-auto text-gray-500">{item.created_at}</Text>
                             </View>
-                            <Text className="p-4 text-gray-800">{item.reply_text}</Text>
+                            <Text className="p-2 text-gray-800">{item.reply_text}</Text>
                             </View>
                             )}
                             ListEmptyComponent={
-                            <Text className="text-center text-gray-500">No questions available</Text>
+                            <Text className="text-center text-gray-500">No replies available</Text>
                             }
                             />      
             </ScrollView>
@@ -171,6 +176,11 @@ export default function Replies() {
                 <Ionicons name="send" size={20} color="white" />
               </TouchableOpacity>
         </View>
+        <StatusBar
+      barStyle="dark-content" // or "light-content" depending on your background
+      backgroundColor="transparent"
+      translucent={true}
+      />
         <Toast/>
             
 

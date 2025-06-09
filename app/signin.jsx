@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Image, SafeAreaView, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 import '../global.css';
 
@@ -40,10 +40,12 @@ export default function SignIn() {
         await AsyncStorage.setItem("farmer_name", data.farmer_name);
         await AsyncStorage.setItem("farmer_email", data.farmer_email);
         await AsyncStorage.setItem("phone_number", data.phone_number);
-        await AsyncStorage.setItem("area_of_residence", data.area_of_residence);
+        await AsyncStorage.setItem("area_of_residence", data.area_of_resident);
         await AsyncStorage.setItem("profile_image", data.profile_image);
         await AsyncStorage.setItem("date_joined", data.date_joined);
-        router.push("/");
+        setEmail("");
+        setPassword("");
+        router.push("home/");
         
       } 
       else {
@@ -108,11 +110,11 @@ export default function SignIn() {
       </TouchableOpacity>
       </View>
       <Toast/>
-      {/* <StatusBar
+      <StatusBar
       barStyle="dark-content" // or "light-content" depending on your background
       backgroundColor="transparent"
       translucent={true}
-      /> */}
+      />
     </View>
     </ScrollView>
     </SafeAreaView>

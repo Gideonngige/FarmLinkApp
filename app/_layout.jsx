@@ -5,12 +5,14 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <Stack screenOptions={{headerShown: true}}>
-        <Stack.Screen name="index"options={{title:"Farm Link"}}  />
+        <Stack.Screen name="index"options={{title:"Welcome"}}  />
+        <Stack.Screen name="home"options={{title:"Farm Link"}}  />
         <Stack.Screen name="replies"options={{title:"Replies"}}  />
         <Stack.Screen name="signin"options={{title:"SignIn"}}  />
         <Stack.Screen name="signup"options={{title:"SignUp"}}  />
         <Stack.Screen name="forgotpassword"options={{title:"Forgot Password"}}  />
         <Stack.Screen name="question"options={{title:"Ask Question"}}  />
+        <Stack.Screen name="chatai"options={{title:"Chat AI"}}  />
 
       </Stack>
     </SafeAreaProvider>
