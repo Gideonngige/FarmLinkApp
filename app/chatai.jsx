@@ -19,7 +19,7 @@ const ChatAI = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer your_api_key`,
           },
         }
       );
