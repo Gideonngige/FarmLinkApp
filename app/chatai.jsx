@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, ScrollView, Text, TextInput, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const ChatAI = () => {
   const [input, setInput] = useState('');
@@ -48,8 +49,14 @@ const ChatAI = () => {
         placeholder="Type your message"
         style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, marginVertical: 10 }}
       />
-      <Button title="Send" onPress={sendMessage} />
+     
+      <TouchableOpacity onPress={sendMessage} className="bg-green-800 px-4 py-2 rounded items-center justify-center">
+      <Text className="text-white text-center font-semibold">SEND</Text>
+      </TouchableOpacity>
+
+      <StatusBar style="auto" />
     </View>
+    
   );
 };
 

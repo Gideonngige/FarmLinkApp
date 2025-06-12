@@ -1,20 +1,21 @@
+import axios from "axios";
+import { useRouter } from "expo-router";
+import { StatusBar } from 'expo-status-bar';
+import { useState } from "react";
 import {
-  Text,
-  View,
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
+  ActivityIndicator,
   Image,
+  KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
   ScrollView,
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from "react-native";
-import { useState } from "react";
-import { useRouter } from "expo-router";
-import axios from "axios";
 import Toast from "react-native-toast-message";
+
 
 export default function ForgotPassword() {
   const router = useRouter();
@@ -109,11 +110,7 @@ export default function ForgotPassword() {
           <Toast />
         </ScrollView>
       </KeyboardAvoidingView>
-      {/* <StatusBar
-        barStyle="dark-content"
-        translucent
-        backgroundColor="transparent"
-      /> */}
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }

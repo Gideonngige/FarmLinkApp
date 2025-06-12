@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
+import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
-import "../global.css";
 
 
 export default function Question(){
@@ -60,7 +60,7 @@ export default function Question(){
     <View className="flex-1 bg-white justify-center items-center p-5 font-sans">
         <Text className="w-full font-lato font-bold mb-4">Question</Text>
         <TextInput
-        className="border border-gray-300 rounded p-2 w-full mb-4"
+        className="border border-gray-300 rounded p-2 h-40 w-full mb-4"
         placeholder="Type your question here..."
         value={question}
         onChangeText={setQuestion}
@@ -80,11 +80,7 @@ export default function Question(){
         </TouchableOpacity>
         <Toast/>
       
-      {/* <StatusBar
-      barStyle="dark-content" // or "light-content" depending on your background
-      backgroundColor="transparent"
-      translucent={true}
-      /> */}
+      <StatusBar style="auto" />
       </View>
       </ScrollView>
       </SafeAreaView>

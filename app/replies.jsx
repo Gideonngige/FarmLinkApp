@@ -1,12 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
   SafeAreaView,
   ScrollView,
-  StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
@@ -176,11 +176,7 @@ export default function Replies() {
                 <Ionicons name="send" size={20} color="white" />
               </TouchableOpacity>
         </View>
-        <StatusBar
-      barStyle="dark-content" // or "light-content" depending on your background
-      backgroundColor="transparent"
-      translucent={true}
-      />
+        <StatusBar style="auto" />
         <Toast/>
             
 

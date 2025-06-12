@@ -1,9 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import "../global.css";
+import { FlatList, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 
 export default function Home() {
@@ -78,6 +78,38 @@ export default function Home() {
     }
   };
 
+
+
+  const crops = [
+  { name: 'Maize', image: require('../assets/images2/maize.png') },
+  { name: 'Beans', image: require('../assets/images2/beans.png') },
+  { name: 'Spinach', image: require('../assets/images2/spinach.png') },
+  { name: 'Onions', image: require('../assets/images2/onions.png') },
+  { name: 'Carrots', image: require('../assets/images2/carrots.png') },
+  { name: 'Blueberries', image: require('../assets/images2/blueberries.png') },
+];
+
+// function to handle going to products
+const handleGoToProducts = async(name) =>{
+  await AsyncStorage.setItem("product_name", name);
+  router.push('/products')
+}
+
+// Reusable CropCard component
+const CropCard = ({ name, image }) => (
+  <TouchableOpacity className="w-40 h-40 mr-4 rounded-lg overflow-hidden" onPress={()=>{handleGoToProducts(name)}}>
+    <ImageBackground
+      source={image}
+      resizeMode="cover"
+      className="flex-1 items-center justify-center"
+    >
+      <Text className="text-white font-bold text-lg bg-black/40 px-2 py-1 rounded">
+        {name}
+      </Text>
+    </ImageBackground>
+  </TouchableOpacity>
+);
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="relative flex-1">
@@ -86,6 +118,16 @@ export default function Home() {
           {/* Hamburger Button */}
           <TouchableOpacity onPress={() => setMenuOpen(!menuOpen)}>
             <Ionicons name="menu" size={32} color="black" />
+          </TouchableOpacity>
+
+          {/* placed orders */}
+          <TouchableOpacity onPress={()=>router.push('/orders')}>
+            <Ionicons name="cart-outline" size={32} color="#166534" />
+          </TouchableOpacity>
+
+          {/* received order from customers */}
+          <TouchableOpacity>
+            <Ionicons name="bag-check-outline" size={32} color="#166534" />
           </TouchableOpacity>
 
           {/* Profile Image */}
@@ -138,32 +180,19 @@ export default function Home() {
               Buy, sell, and help other farmers
             </Text>
           </View>
+{/* Farm Products Section */}
+<View className="p-4">
+<Text className="text-xl font-bold mb-2">Farm Link Products</Text>
 
-          {/* Farm Products Section */}
-          <View className="p-4">
-            <Text className="text-xl font-bold mb-2">Farm Link Products</Text>
-
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              className="mb-4"
-            >
-              
-                <TouchableOpacity className="bg-green-800 w-40 h-40 mr-4 rounded-lg items-center justify-center">
-                  <Text className="text-white">Maize</Text>
-                </TouchableOpacity>
-              
-                <TouchableOpacity className="bg-green-800 w-40 h-40 mr-4 rounded-lg items-center justify-center">
-                  <Text className="text-white">Beans</Text>
-                </TouchableOpacity>
-               
-                <TouchableOpacity className="bg-green-800 w-40 h-40 mr-4 rounded-lg items-center justify-center">
-                  <Text className="text-white">Greengrams</Text>
-                </TouchableOpacity>
-                <TouchableOpacity className="bg-green-800 w-40 h-40 mr-4 rounded-lg items-center justify-center">
-                  <Text className="text-white">Kales</Text>
-                </TouchableOpacity>
-            </ScrollView>
+ <ScrollView
+    horizontal
+    showsHorizontalScrollIndicator={false}
+    className="mb-4"
+  >
+    {crops.map((crop, index) => (
+      <CropCard key={index} name={crop.name} image={crop.image} />
+    ))}
+  </ScrollView>
 
             {/* Trending Section */}
             <Text className="text-xl font-bold mt-2">Trending Farm Talks</Text>
@@ -204,6 +233,7 @@ export default function Home() {
             </ScrollView>
           </View>
         </ScrollView>
+        <StatusBar style="auto" />
       </View>
     </SafeAreaView>
   );

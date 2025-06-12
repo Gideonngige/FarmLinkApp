@@ -1,5 +1,6 @@
 import { router } from "expo-router";
-import { Dimensions, Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import { Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Carousel from 'react-native-reanimated-carousel';
 
 export default function Index() {  
@@ -47,12 +48,7 @@ const renderItem = ({ item }) => (
         <Text className="text-white text-center font-semibold text-lg font-lato p-4">I already have an account</Text>
       </TouchableOpacity>
       </View>
-      
-      <StatusBar
-      barStyle="dark-content" // or "light-content" depending on your background
-      backgroundColor="transparent"
-      translucent={true}
-      />
+      <StatusBar style="auto" />
     </View>
     </ScrollView>
     </SafeAreaView>
