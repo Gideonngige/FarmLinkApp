@@ -126,7 +126,7 @@ const CropCard = ({ name, image }) => (
           </TouchableOpacity>
 
           {/* received order from customers */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>router.push('/placedorders')}>
             <Ionicons name="bag-check-outline" size={32} color="#166534" />
           </TouchableOpacity>
 

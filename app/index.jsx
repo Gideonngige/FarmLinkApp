@@ -40,11 +40,11 @@ const renderItem = ({ item }) => (
 
       <Text className="mt-6 font-lato">Welcome to FarmLink App. Join other farmers, to sell and buy local farm products fresh from the farm. Discuss farm issues  with other farmers.</Text>
 
-      <View className="mt-8">
-        <TouchableOpacity className="bg-green-800 rounded-full w-80" onPress={()=>router.push("/signup")}>
+      <View className="mt-8 w-full">
+        <TouchableOpacity className="bg-green-800 rounded-full" onPress={()=>router.push("/signup")}>
         <Text className="text-white text-center font-semibold text-lg font-lato p-4">Create new account</Text>
       </TouchableOpacity>
-      <TouchableOpacity className="bg-green-800 rounded-full w-80 mt-8" onPress={()=>{router.push("/signin")}}>
+      <TouchableOpacity className="bg-green-800 rounded-full mt-8" onPress={()=>{router.push("/signin")}}>
         <Text className="text-white text-center font-semibold text-lg font-lato p-4">I already have an account</Text>
       </TouchableOpacity>
       </View>

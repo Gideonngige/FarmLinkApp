@@ -17,6 +17,7 @@ export default function RootLayout() {
         <Stack.Screen name="sell"options={{title:"Sell"}}  />
         <Stack.Screen name="notifications"options={{title:"Notifications"}}  />
         <Stack.Screen name="orders"options={{title:"Orders"}}  />
+        <Stack.Screen name="placedorders"options={{title:"Placed Orders"}}  />
 
       </Stack>
     </SafeAreaProvider>
