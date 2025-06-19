@@ -88,7 +88,7 @@ export default function Sell() {
 
     setIsLoading(true);
     try {
-      const res = await axios.post('http://172.16.236.230:8000/sell_product/', formData, {
+      const res = await axios.post('https://farmlinkbackend-qupt.onrender.com/sell_product/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
