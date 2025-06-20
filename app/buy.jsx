@@ -91,6 +91,8 @@ const buyProduct=async()=>{
           farmerId: farmerId,
           productId: productId,
           quantity: quantity,
+          amount: parseInt(cost),
+          
         }),
       });
       if(response2.status === 200){

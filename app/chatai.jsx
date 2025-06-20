@@ -5,42 +5,40 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 
 const ChatAI = () => {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendMessage = async () => {
-    const newMessages = [...messages, { role: 'user', content: input }];
-
+    
+    setIsLoading(true);
     try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
-        {
-          model: 'gpt-3.5-turbo',
-          messages: newMessages,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer your_api_key`,
-          },
-        }
-      );
+      const response = await axios.get("http://172.16.85.15:8000/ask_question/Which disease affect tomatoes/");
+      if(response.status === 200){
+        setMessage(response.data.answer);
+        setInput('');
+      }
+      else{
+        alert("Error in fetching data");
+      }
 
-      const aiMessage = response.data.choices[0].message;
-      setMessages([...newMessages, aiMessage]);
-      setInput('');
+
     } catch (error) {
       console.error('Error:', error.response?.data || error.message);
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
   return (
     <View style={{ padding: 20, flex: 1 }}>
       <ScrollView>
-        {messages.map((msg, index) => (
+        {/* {messages.map((msg, index) => (
           <Text key={index} style={{ marginBottom: 10 }}>
             <Text style={{ fontWeight: 'bold' }}>{msg.role === 'user' ? 'You' : 'AI'}:</Text> {msg.content}
           </Text>
-        ))}
+        ))} */}
+        <Text>{message}</Text>
       </ScrollView>
 
       <TextInput
@@ -51,7 +49,8 @@ const ChatAI = () => {
       />
      
       <TouchableOpacity onPress={sendMessage} className="bg-green-800 px-4 py-2 rounded items-center justify-center">
-      <Text className="text-white text-center font-semibold">SEND</Text>
+        { isLoading ? <Text className="text-white text-center font-semibold">sending...</Text> : <Text className="text-white text-center font-semibold">SEND</Text>}
+      
       </TouchableOpacity>
 
       <StatusBar style="auto" />
