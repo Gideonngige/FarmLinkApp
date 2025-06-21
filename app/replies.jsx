@@ -6,7 +6,6 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -116,7 +115,7 @@ export default function Replies() {
 
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white mb-10">
         
             <View className="bg-white m-2 rounded-lg shadow">
                             <View className="flex-row items-center p-4">
@@ -133,7 +132,7 @@ export default function Replies() {
                             
                           </View>
                         
-                        <ScrollView className="flex-1">
+                        
                           <Text className="w-full m-4 font-bold text-lg">Replies</Text>
 
                           <FlatList
@@ -158,7 +157,7 @@ export default function Replies() {
                             <Text className="text-center text-gray-500">No replies available</Text>
                             }
                             />      
-            </ScrollView>
+            
 
             {/* text input for reply */}
             {/* Input at Bottom */}

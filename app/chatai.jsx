@@ -1,62 +1,47 @@
-import axios from 'axios';
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const ChatAI = () => {
-  const [input, setInput] = useState('');
-  const [message, setMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+export default function ChatAI() {
+  const [message, setMessage] = useState('');
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
-    
-    setIsLoading(true);
-    try {
-      const response = await axios.get("http://172.16.85.15:8000/ask_question/Which disease affect tomatoes/");
-      if(response.status === 200){
-        setMessage(response.data.answer);
-        setInput('');
-      }
-      else{
-        alert("Error in fetching data");
-      }
-
-
-    } catch (error) {
-      console.error('Error:', error.response?.data || error.message);
-    }
-    finally{
-      setIsLoading(false);
-    }
+    setLoading(true);
+    const res = await fetch('https://payments-5rvq.onrender.com/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    });
+    const data = await res.json();
+    setResponse(data.reply);
+    setLoading(false);
   };
 
   return (
-    <View style={{ padding: 20, flex: 1 }}>
-      <ScrollView>
-        {/* {messages.map((msg, index) => (
-          <Text key={index} style={{ marginBottom: 10 }}>
-            <Text style={{ fontWeight: 'bold' }}>{msg.role === 'user' ? 'You' : 'AI'}:</Text> {msg.content}
-          </Text>
-        ))} */}
-        <Text>{message}</Text>
-      </ScrollView>
-
+    <View style={styles.container}>
       <TextInput
-        value={input}
-        onChangeText={setInput}
-        placeholder="Type your message"
-        style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, marginVertical: 10 }}
+        placeholder="Ask Gemini something..."
+        value={message}
+        onChangeText={setMessage}
+        style={styles.input}
+        className='border-green-800'
       />
-     
-      <TouchableOpacity onPress={sendMessage} className="bg-green-800 px-4 py-2 rounded items-center justify-center">
-        { isLoading ? <Text className="text-white text-center font-semibold">sending...</Text> : <Text className="text-white text-center font-semibold">SEND</Text>}
-      
+      <TouchableOpacity onPress={sendMessage} className="w-full bg-green-800 mt-4 mb-4 p-4 rounded-lg">
+        {loading ? (
+          <Text className="text-white text-center font-semibold text-lg">Asking Gemini...</Text>
+        ) : <Text className="text-white text-center font-semibold text-lg">Ask Gemini</Text>}
+        
       </TouchableOpacity>
-
-      <StatusBar style="auto" />
+      <ScrollView>
+        <Text style={styles.response}>{response}</Text>
+      </ScrollView>
     </View>
-    
   );
-};
+}
 
-export default ChatAI;
+const styles = StyleSheet.create({
+  container: { padding: 20, marginTop: 30, marginBottom:160 },
+  input: { borderWidth: 1, padding: 10, marginBottom: 10 },
+  response: { marginTop: 20, fontSize: 16 }
+});

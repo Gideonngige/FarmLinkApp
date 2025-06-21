@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 import { useRouter } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
@@ -32,6 +33,25 @@ export default function Orders(){
     fetchOrders();
   }, []);
 
+    // Mark order as delivered
+  const markAsDelivered = async (orderId) => {
+    try {
+      await axios.get(`https://farmlinkbackend-qupt.onrender.com/confirm_order/${orderId}/`); // Replace with your endpoint
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.id === orderId ? { ...order, delivered: true } : order
+        )
+      );
+      alert('Order marked as delivered.');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to update delivery status.');
+    }
+  };
+
+
+
+
    // item
     const renderItem = ({ item }) => (
       <View className="flex-row mt-4 mx-4 rounded-lg overflow-hidden bg-white shadow-md">
@@ -55,8 +75,8 @@ export default function Orders(){
           </View>
       
           {/* Action Button */}
-          <TouchableOpacity className="mt-4 bg-green-800 rounded-md h-10 justify-center">
-            <Text className="text-center text-white font-bold">Delivered</Text>
+          <TouchableOpacity className="mt-4 bg-green-800 rounded-md h-10 justify-center" onPress={() => markAsDelivered(item.id)}>
+            <Text className="text-center text-white font-bold">Mark as Delivered</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -64,7 +84,7 @@ export default function Orders(){
 
     
     return(
-        <SafeAreaView className="flex-1 bg-white">
+        <SafeAreaView className="flex-1 bg-white mb-10">
           {isLoading ? (
         <Text>Loading products...</Text>
       ) : orders.length === 0 ? (

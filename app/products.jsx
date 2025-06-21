@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 
 
 export default function Products(){
@@ -91,7 +91,7 @@ export default function Products(){
         <Text className='text-white font-bold text-center'>SELL</Text>
         </TouchableOpacity>
       </View>
-        <ScrollView nestedScrollEnabled={true} className="p-4">
+        
     <View className="flex-1 bg-white p-2 font-sans">
 
       {isLoading ? (
@@ -110,7 +110,7 @@ export default function Products(){
       
       <StatusBar style="auto" />
       </View>
-      </ScrollView>
+      
       </SafeAreaView>
     
     );

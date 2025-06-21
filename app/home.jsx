@@ -95,6 +95,12 @@ const handleGoToProducts = async(name) =>{
   router.push('/products')
 }
 
+// function to handle go to profile
+const goToProfile=()=>{
+  router.push('/profile')
+}
+
+
 // Reusable CropCard component
 const CropCard = ({ name, image }) => (
   <TouchableOpacity className="w-40 h-40 mr-4 rounded-lg overflow-hidden" onPress={()=>{handleGoToProducts(name)}}>
@@ -111,7 +117,7 @@ const CropCard = ({ name, image }) => (
 );
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white mb-10">
       <View className="relative flex-1">
         {/* Header */}
         <View className="flex-row items-center justify-between p-4 bg-white shadow z-10">
@@ -131,7 +137,7 @@ const CropCard = ({ name, image }) => (
           </TouchableOpacity>
 
           {/* Profile Image */}
-          <TouchableOpacity onPress={() => console.log("Profile tapped")}>
+          <TouchableOpacity onPress={goToProfile}>
             <Image
               source={{ uri: profileImage }}
               className="w-10 h-10 rounded-full"
@@ -155,11 +161,8 @@ const CropCard = ({ name, image }) => (
             <TouchableOpacity onPress={() => router.push("/question")} className="mt-4 bg-white p-2 rounded-lg">
               <Text className="text-lg">Ask Question</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push("/signup")} className="mt-4 bg-white p-2 rounded-lg">
+            <TouchableOpacity onPress={() => router.push("/profile")} className="mt-4 bg-white p-2 rounded-lg">
               <Text className="text-lg">Profile</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push("/question")} className="mt-4 bg-white p-2 rounded-lg">
-              <Text className="text-lg">Settings</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => router.push("/chatai")} className="mt-4 bg-white p-2 rounded-lg">
               <Text className="text-lg">Chat AI</Text>
@@ -196,7 +199,7 @@ const CropCard = ({ name, image }) => (
 
             {/* Trending Section */}
             <Text className="text-xl font-bold mt-2">Trending Farm Talks</Text>
-            <ScrollView vertical showsHorizontalScrollIndicator={false} className="mt-2">
+            
             <FlatList
               data={questions}
               keyExtractor={(item) => item.id.toString()}
@@ -230,7 +233,7 @@ const CropCard = ({ name, image }) => (
               }
             />
               
-            </ScrollView>
+            
           </View>
         </ScrollView>
         <StatusBar style="auto" />
