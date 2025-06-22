@@ -109,7 +109,7 @@ export default function Sell() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white mb-20">
       <ScrollView nestedScrollEnabled={true} className="p-4">
         <View className="flex-1 justify-center items-center p-5">
           <Text className="w-full font-bold mb-2">Product Name</Text>

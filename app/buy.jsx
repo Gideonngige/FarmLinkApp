@@ -54,11 +54,11 @@ export default function Buy() {
 
 // buy product function
 const buyProduct=async()=>{
-  const available = parseInt(available);
+  const available2 = parseInt(available);
   if(quantity < 1){
     alert("Enter a valid quantity");
   }
-  else if(quantity > available){
+  else if(quantity > available2){
     alert("The quantity is greater than available amount!")
   }
   else{

@@ -9,6 +9,7 @@ import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "rea
 export default function Orders(){
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [isMarking, setMarking] = useState(false);
     const [orders, setOrders] = useState([]);
 
     // get orders function
@@ -34,8 +35,23 @@ export default function Orders(){
   }, []);
 
     // Mark order as delivered
-  const markAsDelivered = async (orderId) => {
-    try {
+  const markAsDelivered = async (orderId, paid) => {
+    const amount = paid * 0.85
+     setMarking(true);
+    try{
+    const response = await fetch('https://payments-5rvq.onrender.com/b2c/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone:"254797655727",
+          amount: parseFloat(amount),
+        }),
+      });
+
+    if(response.ok){
+      try {
       await axios.get(`https://farmlinkbackend-qupt.onrender.com/confirm_order/${orderId}/`); // Replace with your endpoint
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
@@ -47,6 +63,15 @@ export default function Orders(){
       console.error(err);
       alert('Failed to update delivery status.');
     }
+    }
+    }
+    catch(err){
+      console.log(err);
+    }
+    finally{
+      setMarking(false);
+    }
+
   };
 
 
@@ -75,8 +100,9 @@ export default function Orders(){
           </View>
       
           {/* Action Button */}
-          <TouchableOpacity className="mt-4 bg-green-800 rounded-md h-10 justify-center" onPress={() => markAsDelivered(item.id)}>
-            <Text className="text-center text-white font-bold">Mark as Delivered</Text>
+          <TouchableOpacity className="mt-4 bg-green-800 rounded-md h-10 justify-center" onPress={() => markAsDelivered(item.id, item.amount)}>
+            {isMarking ? <Text className="text-center text-white font-bold">Marking...</Text> : <Text className="text-center text-white font-bold">Mark as Delivered</Text>}
+            
           </TouchableOpacity>
         </View>
       </View>
