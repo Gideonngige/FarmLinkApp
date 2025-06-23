@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
+import NavBar from "./NavBar";
 
 export default function Buy() {
     const [quantity, setQuantity] = useState(0);
@@ -149,6 +150,7 @@ const buyProduct=async()=>{
       </ScrollView>
       <Toast />
       <StatusBar style="auto" />
+      <NavBar />
     </SafeAreaView>
   );
 }

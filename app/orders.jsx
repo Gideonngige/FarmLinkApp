@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import NavBar from "./NavBar";
 
 
 export default function Orders(){
@@ -110,11 +111,11 @@ export default function Orders(){
 
     
     return(
-        <SafeAreaView className="flex-1 bg-white mb-10">
+        <SafeAreaView className="flex-1 bg-white mb-0">
           {isLoading ? (
-        <Text>Loading products...</Text>
+        <Text className="m-4">Loading products...</Text>
       ) : orders.length === 0 ? (
-        <Text>You have not received any order.</Text>
+        <Text className="m-4">You have not received any order.</Text>
       ) : (
         <FlatList
           data={orders}
@@ -124,6 +125,7 @@ export default function Orders(){
         />
       )}
       
+      <NavBar />
       <StatusBar style="auto" />
       </SafeAreaView>
     

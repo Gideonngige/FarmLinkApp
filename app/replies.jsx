@@ -12,6 +12,7 @@ import {
   View
 } from "react-native";
 import Toast from "react-native-toast-message";
+import NavBar from "./NavBar";
 
 export default function Replies() {
     const [reply, setReply] = useState("");
@@ -28,8 +29,8 @@ export default function Replies() {
       const fetchFarmerData = async () => {
         const question_id = await AsyncStorage.getItem("question_id");
         const question_text = await AsyncStorage.getItem("question_text");
-        const farmer_name = await AsyncStorage.getItem("farmer_name");
-        const profile_image = await AsyncStorage.getItem("profile_image");
+        const farmer_name = await AsyncStorage.getItem("farmer_name_r");
+        const profile_image = await AsyncStorage.getItem("profile_image_r");
         const created_at = await AsyncStorage.getItem("created_at");
 
         setQuestionId(question_id || "");
@@ -180,7 +181,7 @@ export default function Replies() {
             
 
         
-      
+      <NavBar />
     </SafeAreaView>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import NavBar from './NavBar';
 
 export default function ChatAI() {
   const [message, setMessage] = useState('');
@@ -19,6 +20,7 @@ export default function ChatAI() {
   };
 
   return (
+    <SafeAreaView className="flex-1 bg-white mb-0">
     <View style={styles.container}>
       <TextInput
         placeholder="Ask Gemini something..."
@@ -33,10 +35,13 @@ export default function ChatAI() {
         ) : <Text className="text-white text-center font-semibold text-lg">Ask Gemini</Text>}
         
       </TouchableOpacity>
-      <ScrollView>
+      <ScrollView className='mb-10'>
         <Text style={styles.response}>{response}</Text>
       </ScrollView>
     </View>
+    <NavBar />
+    </SafeAreaView>
+    
   );
 }
 

@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import NavBar from './NavBar';
 
 
 export default function Products(){
@@ -111,6 +112,7 @@ export default function Products(){
       <StatusBar style="auto" />
       </View>
       
+      <NavBar />
       </SafeAreaView>
     
     );

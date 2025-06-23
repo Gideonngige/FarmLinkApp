@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import NavBar from "./NavBar";
 
 
 export default function Home() {
@@ -69,8 +70,8 @@ export default function Home() {
     try {
       await AsyncStorage.setItem("question_id", questionId.toString());
       await AsyncStorage.setItem("question_text", question_text);
-      await AsyncStorage.setItem("farmer_name", farmer_name);
-      await AsyncStorage.setItem("profile_image", profile_image);
+      await AsyncStorage.setItem("farmer_name_r", farmer_name);
+      await AsyncStorage.setItem("profile_image_r", profile_image);
       await AsyncStorage.setItem("created_at", created_at);
       router.push("/replies");
     } catch (error) {
@@ -117,7 +118,7 @@ const CropCard = ({ name, image }) => (
 );
 
   return (
-    <SafeAreaView className="flex-1 bg-white mb-10">
+    <SafeAreaView className="flex-1 bg-white mb-0">
       <View className="relative flex-1">
         {/* Header */}
         <View className="flex-row items-center justify-between p-4 bg-white shadow z-10">
@@ -200,6 +201,7 @@ const CropCard = ({ name, image }) => (
             {/* Trending Section */}
             <Text className="text-xl font-bold mt-2">Trending Farm Talks</Text>
             
+            <View className="mb-20">
             <FlatList
               data={questions}
               keyExtractor={(item) => item.id.toString()}
@@ -232,10 +234,12 @@ const CropCard = ({ name, image }) => (
                 <Text className="text-center text-gray-500">No talks available</Text>
               }
             />
+            </View>
               
             
           </View>
         </ScrollView>
+        <NavBar />
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>

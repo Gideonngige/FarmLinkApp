@@ -32,7 +32,7 @@ export default function ForgotPassword() {
           text2: "Please enter your email address.",
         });
       } else {
-        const url = `https://backend1-1cc6.onrender.com/postReset/${email}/`;
+        const url = `https://farmlinkbackend-qupt.onrender.com/reset_password/${email}/`;
         const response = await axios.get(url);
         Toast.show({
           type: "success",

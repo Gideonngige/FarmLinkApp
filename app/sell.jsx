@@ -16,6 +16,7 @@ import {
   View,
 } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
+import NavBar from './NavBar';
 
 export default function Sell() {
   const router = useRouter();
@@ -109,8 +110,8 @@ export default function Sell() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white mb-20">
-      <ScrollView nestedScrollEnabled={true} className="p-4">
+    <SafeAreaView className="flex-1 bg-white mb-0">
+      <ScrollView nestedScrollEnabled={true} className="p-4 mb-40">
         <View className="flex-1 justify-center items-center p-5">
           <Text className="w-full font-bold mb-2">Product Name</Text>
           <DropDownPicker
@@ -177,6 +178,7 @@ export default function Sell() {
           <StatusBar style="auto" />
         </View>
       </ScrollView>
+      <NavBar />
     </SafeAreaView>
   );
 }
