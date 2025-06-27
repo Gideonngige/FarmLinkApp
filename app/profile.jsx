@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Image, SafeAreaView, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+
 export default function Profile() {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
@@ -62,6 +63,7 @@ export default function Profile() {
   const handleUpdate = async () => {
     if (fullname === "" || phonenumber === "" || value == null) {
       Alert.alert("Empty field", "Please fill all fields");
+
       return;
     }
 

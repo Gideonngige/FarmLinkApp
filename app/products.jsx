@@ -1,16 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from './NavBar';
+import { fetchProducts } from './store/productsSlice';
 
 
 export default function Products(){
   const router = useRouter()
     const [productName, setProductName] = useState("");
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [products, setProducts] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+    const { products, loading } = useSelector((state) => state.products);
 
     useEffect(()=>{
         const fetchData= async()=>{
@@ -27,26 +32,15 @@ export default function Products(){
     }
 
     // get products function
-      useEffect(() => {
-    const fetchProducts = async () => {
+      useFocusEffect(
+  React.useCallback(() => {
+    const loadProducts = async () => {
       const product_name = await AsyncStorage.getItem("product_name");
-      setIsLoading(true);
-        try {
-          const res = await fetch(`https://farmlinkbackend-qupt.onrender.com/get_products/${product_name}`);
-          const data = await res.json();
-          setProducts(data.products);
-        } catch (err) {
-          alert("Error fetching products");
-          console.error('Error fetching products:', err);
-        }
-        finally{
-          setIsLoading(false);
-        }
-       
+      dispatch(fetchProducts(product_name));
     };
-
-    fetchProducts();
-  }, []);
+    loadProducts();
+  }, [dispatch])
+);
 
   // function to handle buy item
   const handleBuy=async(product_id, seller_id, price, quantity)=>{
@@ -95,7 +89,7 @@ export default function Products(){
         
     <View className="flex-1 bg-white p-2 font-sans">
 
-      {isLoading ? (
+      {loading ? (
   <Text>Loading products...</Text>
 ) : products.length === 0 ? (
   <Text>No products available at the moment.</Text>
