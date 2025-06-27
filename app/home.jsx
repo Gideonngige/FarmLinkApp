@@ -219,7 +219,7 @@ const CropCard = ({ name, image }) => (
                 </View>
                 <Text className="p-4 text-gray-800">{item.question_text}</Text>
                 <View className="flex-row justify-between items-center px-4">
-                  <TouchableOpacity className="px-4 py-2 rounded-full">
+                  <TouchableOpacity className="px-4 py-2 rounded-full" onPress={()=> router.push('/display')}>
                     <Text className="text-green-800 font-bold">80 replies</Text>
                   </TouchableOpacity>
 

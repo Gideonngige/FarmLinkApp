@@ -1,9 +1,13 @@
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider } from 'react-redux';
 import NotificationIcon from './NotificationIcon';
+import store from './store/store';
 export default function RootLayout() {
   return (
+    
     <SafeAreaProvider>
+      <Provider store={store}>
       <Stack screenOptions={{headerShown: true}}>
         <Stack.Screen name="index"options={{title:"Welcome"}}  />
         <Stack.Screen name="home"options={{title:"Farm Link", headerRight: () => <NotificationIcon/> }}   />
@@ -19,8 +23,10 @@ export default function RootLayout() {
         <Stack.Screen name="orders"options={{title:"Orders", headerRight: () => <NotificationIcon/>}}  />
         <Stack.Screen name="placedorders"options={{title:"Placed Orders", headerRight: () => <NotificationIcon/>}}  />
         <Stack.Screen name="buy"options={{title:"Buy"}}  />
+        <Stack.Screen name="display"options={{title:"Redux"}}  />
 
       </Stack>
+      </Provider>
     </SafeAreaProvider>
   );
 }

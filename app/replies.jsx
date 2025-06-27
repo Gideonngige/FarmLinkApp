@@ -116,7 +116,7 @@ export default function Replies() {
 
 
   return (
-    <SafeAreaView className="flex-1 bg-white mb-10">
+    <SafeAreaView className="flex-1 bg-white mb-0">
         
             <View className="bg-white m-2 rounded-lg shadow">
                             <View className="flex-row items-center p-4">
@@ -162,7 +162,7 @@ export default function Replies() {
 
             {/* text input for reply */}
             {/* Input at Bottom */}
-            <View className="flex-row items-center mb-0 p-3 border-t border-gray-200 bg-white">
+            <View className="flex-row items-center mb-20 p-3 border-t border-gray-200 bg-white">
           <TextInput
             value={reply}
             onChangeText={setReply}

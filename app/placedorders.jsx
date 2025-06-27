@@ -60,7 +60,7 @@ export default function PlacedOrders(){
 
     
     return(
-        <SafeAreaView className="flex-1 bg-white mb-10">
+        <SafeAreaView className="flex-1 bg-white">
           {isLoading ? (
                   <Text className="m-4">Loading products...</Text>
                 ) : placedOrders.length === 0 ? (
