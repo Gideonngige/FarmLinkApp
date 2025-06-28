@@ -7,6 +7,7 @@ import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "rea
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from './NavBar';
 import { fetchProducts } from './store/productsSlice';
+import "../global.css";
 
 
 export default function Products(){

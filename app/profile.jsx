@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Image, SafeAreaView, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import "../global.css";
 
 
 export default function Profile() {

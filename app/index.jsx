@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
 import { Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Carousel from 'react-native-reanimated-carousel';
+import "../global.css";
 
 export default function Index() {  
 const SLIDER_WIDTH = Dimensions.get('window').width;

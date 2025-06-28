@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import NavBar from './NavBar';
+import "../global.css";
 
 export default function Sell() {
   const router = useRouter();

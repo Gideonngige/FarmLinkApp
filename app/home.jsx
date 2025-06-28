@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import NavBar from "./NavBar";
+import "../global.css";
 
 
 export default function Home() {
@@ -286,7 +287,7 @@ const CropCard = ({ name, image }) => (
                 </View>
                 <Text className="p-4 text-gray-800">{item.question_text}</Text>
                 <View className="flex-row justify-between items-center px-4">
-                  <TouchableOpacity className="px-4 py-2 rounded-full" onPress={()=> router.push('/display')}>
+                  <TouchableOpacity className="px-4 py-2 rounded-full">
                     <Text className="text-green-800 font-bold">80 replies</Text>
                   </TouchableOpacity>
 

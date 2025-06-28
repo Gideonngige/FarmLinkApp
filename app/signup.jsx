@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import Toast from "react-native-toast-message";
+import "../global.css";
 
 
 

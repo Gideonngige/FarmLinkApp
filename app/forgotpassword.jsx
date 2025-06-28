@@ -15,6 +15,7 @@ import {
   View
 } from "react-native";
 import Toast from "react-native-toast-message";
+import "../global.css";
 
 
 export default function ForgotPassword() {

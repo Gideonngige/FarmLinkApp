@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import NavBar from "./NavBar";
+import "../global.css";
 
 
 export default function Orders(){

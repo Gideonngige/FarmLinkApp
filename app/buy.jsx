@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 import NavBar from "./NavBar";
+import "../global.css";
 
 export default function Buy() {
     const [quantity, setQuantity] = useState(0);

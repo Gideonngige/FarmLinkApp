@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 import NavBar from './NavBar';
+import "../global.css";
 
 
 export default function Question(){

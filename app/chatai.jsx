@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import NavBar from './NavBar';
+import "../global.css";
 
 export default function ChatAI() {
   const [message, setMessage] = useState('');
