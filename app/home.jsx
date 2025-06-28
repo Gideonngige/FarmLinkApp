@@ -1,8 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from "axios";
+import * as Notifications from 'expo-notifications';
 import { useRouter } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import NavBar from "./NavBar";
 
@@ -18,6 +20,71 @@ export default function Home() {
   const [dateJoined, setDateJoined] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
+
+  Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
+
+const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+  const [expoPushToken, setExpoPushToken] = useState('');
+
+  useEffect(() => {
+    // alert("Hello");
+    const getToken = async () => {
+      const farmer_id = await AsyncStorage.getItem("farmer_id");
+  try {
+    // alert("Inside getToken start");
+    const token = (await Notifications.getExpoPushTokenAsync({
+    projectId: '16e523ba-0376-4934-8294-6ffb18c97138'
+})).data;
+    const cleanToken = token.replace(/^ExponentPushToken\[(.*)\]$/, '$1');
+    console.log("Expo Push Token:", cleanToken);
+    // alert(`Expo Push Token: ${cleanToken}`);
+    setExpoPushToken(token);
+    const url = `https://farmlinkbackend-qupt.onrender.com/send_expo_token/${farmer_id}/${cleanToken}/`;
+    const response2 = await axios.get(url);
+    if(response2.status === 200){
+      // alert(response2.data.message);
+      console.log(response2.data.message);
+    }
+    else{
+      // alert("Token not sent");
+      console.log("Token not sent")
+    }
+
+    // alert("Inside getToken end");
+  } catch (error) {
+    console.error("Error in getToken:", error);
+    // alert(`Error in getToken: ${error.message}`);
+  }
+};
+
+
+    getToken();
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+        notificationListener.current?.remove();
+        responseListener.current?.remove();
+    };
+
+  }, []);
+
+
+  
 
   // function to fetch farmer data from signin
   useEffect(() => {
