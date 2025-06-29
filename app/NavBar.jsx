@@ -53,7 +53,7 @@ export default function NavBar() {
   }
 
   return (
-    <View className="absolute bottom-4 left-4 right-4 bg-green-800 rounded-lg px-6 py-3 shadow-lg shadow-black/20 mb-0">
+    <View className="absolute bottom-4 left-4 right-4 bg-green-800 rounded-lg px-6 py-3 shadow-lg shadow-black/20" style={{marginBottom:50}}>
       <View className="flex-row justify-between items-center">
         {/* Home */}
         <TouchableOpacity onPress={handleHome} className="items-center flex-1">

@@ -3,9 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 import * as Notifications from 'expo-notifications';
 import { useRouter } from "expo-router";
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from "react";
-import { FlatList, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, StatusBar, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import NavBar from "./NavBar";
 import "../global.css";
 
@@ -44,11 +44,11 @@ const [notification, setNotification] = useState(false);
     const token = (await Notifications.getExpoPushTokenAsync({
     projectId: '16e523ba-0376-4934-8294-6ffb18c97138'
 })).data;
-    const cleanToken = token.replace(/^ExponentPushToken\[(.*)\]$/, '$1');
-    console.log("Expo Push Token:", cleanToken);
+    // const cleanToken = token.replace(/^ExponentPushToken\[(.*)\]$/, '$1');
+    console.log("Expo Push Token:", token);
     // alert(`Expo Push Token: ${cleanToken}`);
     setExpoPushToken(token);
-    const url = `https://farmlinkbackend-qupt.onrender.com/send_expo_token/${farmer_id}/${cleanToken}/`;
+    const url = `https://farmlinkbackend-qupt.onrender.com/send_expo_token/${farmer_id}/${token}/`;
     const response2 = await axios.get(url);
     if(response2.status === 200){
       // alert(response2.data.message);
@@ -75,6 +75,19 @@ const [notification, setNotification] = useState(false);
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       console.log(response);
+
+      const data = response.notification.request.content.data;
+      const title = response.notification.request.content.title;
+      const body = response.notification.request.content.body;
+      router.push({
+        pathname: "/notificationdetails",
+        params: {
+          order_id: data.order_id,
+          message: data.message || "",
+          title: title || "",
+          body: body || ""
+    },
+  });
     });
 
     return () => {
@@ -269,7 +282,7 @@ const CropCard = ({ name, image }) => (
             {/* Trending Section */}
             <Text className="text-xl font-bold mt-2">Trending Farm Talks</Text>
             
-            <View className="mb-20">
+            <View className="" style={{marginBottom:130}}>
             <FlatList
               data={questions}
               keyExtractor={(item) => item.id.toString()}

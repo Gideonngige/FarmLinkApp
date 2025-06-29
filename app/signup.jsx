@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useRouter } from "expo-router";
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import { useState } from "react";
-import { ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, SafeAreaView, StatusBar, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import Toast from "react-native-toast-message";
 import "../global.css";
@@ -117,7 +117,7 @@ export default function SignUp(){
     return(
         <SafeAreaView className="flex-1 bg-white">
         <ScrollView nestedScrollEnabled={true} className="p-4">
-    <View className="flex-1 bg-white justify-center items-center p-5 font-sans">
+    <View className="flex-1 bg-white justify-center items-center p-5 font-sans mb-40">
       <Text className="text-xl text-green-800 font-bold">SignUp</Text>
     <View className="w-full">
 

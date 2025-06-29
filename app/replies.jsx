@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import {
   FlatList,
@@ -9,7 +9,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  StatusBar
 } from "react-native";
 import Toast from "react-native-toast-message";
 import NavBar from "./NavBar";
@@ -163,7 +164,7 @@ export default function Replies() {
 
             {/* text input for reply */}
             {/* Input at Bottom */}
-            <View className="flex-row items-center mb-20 p-3 border-t border-gray-200 bg-white">
+            <View className="flex-row items-center p-3 border-t border-gray-200 bg-white" style={{marginBottom:130}}>
           <TextInput
             value={reply}
             onChangeText={setReply}
@@ -186,3 +187,5 @@ export default function Replies() {
     </SafeAreaView>
   );
 }
+
+

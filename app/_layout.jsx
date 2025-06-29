@@ -24,6 +24,7 @@ export default function RootLayout() {
         <Stack.Screen name="placedorders"options={{title:"Placed Orders", headerRight: () => <NotificationIcon/>}}  />
         <Stack.Screen name="buy"options={{title:"Buy"}}  />
         <Stack.Screen name="display"options={{title:"Redux"}}  />
+        <Stack.Screen name="notificationsdetails"options={{title:"Notifications"}}  />
 
       </Stack>
       </Provider>

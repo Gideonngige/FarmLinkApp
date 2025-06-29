@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import NavBar from './NavBar';
 import "../global.css";
 
@@ -39,6 +39,7 @@ export default function ChatAI() {
       <ScrollView className='mb-10'>
         <Text style={styles.response}>{response}</Text>
       </ScrollView>
+      <StatusBar style="auto" />
     </View>
     <NavBar />
     </SafeAreaView>

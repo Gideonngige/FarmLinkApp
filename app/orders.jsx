@@ -1,9 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useRouter } from "expo-router";
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, SafeAreaView, StatusBar, Text, TouchableOpacity, View, ActivityIndicator } from "react-native";
 import NavBar from "./NavBar";
 import "../global.css";
 
@@ -11,6 +11,7 @@ import "../global.css";
 export default function Orders(){
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [markingId, setMarkingId] = useState(null);
     const [isMarking, setMarking] = useState(false);
     const [orders, setOrders] = useState([]);
 
@@ -39,7 +40,7 @@ export default function Orders(){
     // Mark order as delivered
   const markAsDelivered = async (orderId, paid) => {
     const amount = paid * 0.85
-     setMarking(true);
+     setMarkingId(orderId);
     try{
     const response = await fetch('https://payments-5rvq.onrender.com/b2c/send', {
         method: 'POST',
@@ -71,7 +72,7 @@ export default function Orders(){
       console.log(err);
     }
     finally{
-      setMarking(false);
+      setMarkingId(null);
     }
 
   };
@@ -102,10 +103,21 @@ export default function Orders(){
           </View>
       
           {/* Action Button */}
-          <TouchableOpacity className="mt-4 bg-green-800 rounded-md h-10 justify-center" onPress={() => markAsDelivered(item.id, item.amount)}>
-            {isMarking ? <Text className="text-center text-white font-bold">Marking...</Text> : <Text className="text-center text-white font-bold">Mark as Delivered</Text>}
-            
-          </TouchableOpacity>
+          <TouchableOpacity
+  className="mt-4 bg-green-800 rounded-md h-10 justify-center items-center flex-row"
+  onPress={() => markAsDelivered(item.id, item.amount)}
+  disabled={markingId === item.id}
+>
+  {markingId === item.id ? (
+    <>
+      <ActivityIndicator size="small" color="#fff" className="mr-2" />
+      <Text className="text-white font-bold">Marking...</Text>
+    </>
+  ) : (
+    <Text className="text-white font-bold">Mark as Delivered</Text>
+  )}
+</TouchableOpacity>
+
         </View>
       </View>
     );

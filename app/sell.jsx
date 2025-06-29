@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from "expo-router";
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -14,6 +14,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StatusBar
 } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import NavBar from './NavBar';
@@ -26,9 +27,11 @@ export default function Sell() {
   const [items, setItems] = useState([
     { label: 'Maize', value: 'Maize' },
     { label: 'Beans', value: 'Beans' },
-    { label: 'Greengrams', value: 'Greengrams' },
+    { label: 'Spinach', value: 'Spinach' },
+    { label: 'Onions', value: 'Onions' },
     { label: 'Carrots', value: 'Carrots' },
     { label: 'Kales', value: 'Kales' },
+    { label: 'Blueberries', value: 'Blueberries' },
   ]);
 
   const [description, setDescription] = useState("");
